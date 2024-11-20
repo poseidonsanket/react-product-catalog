@@ -38,7 +38,7 @@ export default function App() {
 
     if (searchTerm) {
       result = result.filter((product) =>
-        product.name.toLowerCase().includes(searchTerm.toLowerCase())
+        product.title.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 

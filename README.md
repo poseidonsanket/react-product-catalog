@@ -78,7 +78,15 @@ To run the application locally:
 
 ## Screenshots
 
+### Product List Page  
 ![Product List Page](/public/image.png)
+
+### Product Details Page  
 ![Product Details Page](/public/image-1.png)
+
+### Cart Page  
 ![Cart Page](/public/image-2.png)
+
+### Pagination  
 ![Pagination](/public/image-3.png)
+

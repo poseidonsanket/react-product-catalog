@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
-const ProductCard = ({currentProducts}) => {
+const ProductCard = ({currentProducts,addToCart}) => {
   return (
     <div>
       <motion.div

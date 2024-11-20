@@ -1,7 +1,9 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Search, ArrowUpDown, ChevronLeft, ChevronRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+
+import { Search, ArrowUpDown, ChevronLeft, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
+import ProductCard from "./ProductCard";
+import Category from "./Category";
 
 export default function ProductList({
   products,
@@ -13,7 +15,7 @@ export default function ProductList({
   sortOrder,
   addToCart,
 }) {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 8;
 
@@ -25,7 +27,10 @@ export default function ProductList({
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+  const currentProducts = products.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
 
   const totalPages = Math.ceil(products.length / productsPerPage);
 
@@ -58,72 +63,13 @@ export default function ProductList({
           whileTap={{ scale: 0.95 }}
         >
           Sort by Price
-          <ArrowUpDown className={`ml-2 ${sortOrder === 'asc' ? 'rotate-180' : ''}`} />
+          <ArrowUpDown
+            className={`ml-2 ${sortOrder === "asc" ? "rotate-180" : ""}`}
+          />
         </motion.button>
       </div>
-      <div className="mb-8 flex flex-wrap gap-2">
-        {categories.map((category) => (
-          <motion.button
-            key={category}
-            onClick={() => onCategoryChange(category)}
-            className={`px-4 py-2 rounded-full text-sm font-medium ${
-              selectedCategories.includes(category)
-                ? 'bg-indigo-500 text-white'
-                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-            }`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            {category}
-          </motion.button>
-        ))}
-      </div>
-      <motion.div
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ staggerChildren: 0.1 }}
-      >
-        {currentProducts.map((product) => (
-          <motion.div
-            key={product.id}
-            className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col"
-            whileHover={{ y: -5, boxShadow: '0 10px 20px rgba(0,0,0,0.1)' }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            <div className="relative pt-[100%]">
-              <img 
-                src={product.image} 
-                alt={product.title} 
-                className="absolute top-0 left-0 w-full h-full object-fill"
-              />
-            </div>
-            <div className="p-4 flex flex-col flex-grow">
-              <h2 className="text-lg font-semibold mb-2 text-gray-800 line-clamp-2 h-14">
-                {product.title}
-              </h2>
-              <p className="text-indigo-600 font-bold mb-4">${product.price.toFixed(2)}</p>
-              <div className="flex justify-between items-center mt-auto">
-                <Link
-                  to={`/product/${product.id}`}
-                  className="text-indigo-500 hover:text-indigo-600 font-medium"
-                >
-                  View Details
-                </Link>
-                <motion.button
-                  onClick={() => addToCart(product.id)}
-                  className="px-3 py-1 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 transition-colors"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Add to Cart
-                </motion.button>
-              </div>
-            </div>
-          </motion.div>
-        ))}
-      </motion.div>
+      <Category categories={categories} selectedCategories={selectedCategories} onCategoryChange={onCategoryChange}/>
+      <ProductCard currentProducts={currentProducts} />
       {totalPages > 1 && (
         <div className="mt-8 flex justify-center items-center space-x-2">
           <motion.button
@@ -141,8 +87,8 @@ export default function ProductList({
               onClick={() => handlePageChange(page)}
               className={`px-4 py-2 rounded-md ${
                 currentPage === page
-                  ? 'bg-indigo-500 text-white'
-                  : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+                  ? "bg-indigo-500 text-white"
+                  : "bg-gray-200 text-gray-600 hover:bg-gray-300"
               }`}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}

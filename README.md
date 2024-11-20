@@ -78,7 +78,7 @@ To run the application locally:
 
 ## Screenshots
 
-![Product List Page](![alt text](/public/image.png))
-![Product Details Page](![alt text](/public/image-1.png))
-![Cart Page](![alt text](/public/image-2.png))
-![Pagination](![alt text](/public/image-3.png))
+![Product List Page](/public/image.png)
+![Product Details Page](/public/image-1.png)
+![Cart Page](/public/image-2.png)
+![Pagination](/public/image-3.png)
